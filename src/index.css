@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Special+Elite&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-vintage-light: #E4D6C4;
+  --color-vintage: #D6C2A9;
+  --color-vintage-dark: #C4AD8D;
+  --color-ink-light: #3A2F2B;
+  --color-ink: #2C1A12;
+  --color-ink-dark: #1A120E;
+  
+  --color-stamp-red: #8B2C1B;
+  --color-stamp-green: #3B5A30;
+
+  --font-serif: "Cormorant Garamond", serif;
+  --font-typewriter: "Special Elite", monospace;
+
+  /* Grainy, aged paper texture */
+  --background-image-aged-paper: url('https://www.transparenttextures.com/patterns/worn-dots.png'), linear-gradient(to bottom, #D9C5A8, #E2CEB2, #D2B795);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: var(--color-vintage);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Ctext x='40' y='40' font-size='40' font-family='Georgia, serif' text-anchor='middle' dominant-baseline='central' fill='%232C1A12' opacity='0.04' transform='rotate(15 40 40)'%3E❦%3C/text%3E%3Ctext x='120' y='120' font-size='40' font-family='Georgia, serif' text-anchor='middle' dominant-baseline='central' fill='%232C1A12' opacity='0.04' transform='rotate(-15 120 120)'%3E☙%3C/text%3E%3Ctext x='120' y='40' font-size='20' font-family='Georgia, serif' text-anchor='middle' dominant-baseline='central' fill='%232C1A12' opacity='0.03' transform='rotate(45 120 40)'%3E✤%3C/text%3E%3Ctext x='40' y='120' font-size='20' font-family='Georgia, serif' text-anchor='middle' dominant-baseline='central' fill='%232C1A12' opacity='0.03' transform='rotate(-45 40 120)'%3E✥%3C/text%3E%3C/svg%3E"), var(--background-image-aged-paper);
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    -webkit-font-smoothing: antialiased;
+    /* Simulate printed texture slightly */
+    text-shadow: 0px 0px 1px rgba(0,0,0,0.1);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 700;
+  }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: overlay;
+}
+
+@utility ornate-border {
+  border: 2px solid var(--color-ink);
+  padding: 4px;
+  position: relative;
+}
+
+@utility ornate-border-inner {
+  border: 1px solid var(--color-ink);
+  content: "";
+  display: block;
+}
+
+@utility dashed-divider {
+  border-bottom: 2px dashed var(--color-ink-light);
+  opacity: 0.6;
+}
+
+@utility fill-blank {
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed var(--color-ink);
+  font-family: var(--font-typewriter);
+  color: var(--color-ink-dark);
+  padding: 4px 0;
+
+  &:focus {
+    outline: none;
+    border-bottom: 2px solid var(--color-ink);
+  }
+}
