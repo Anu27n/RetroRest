@@ -39,6 +39,15 @@ const Menu = () => {
     <section className="relative min-h-screen py-16 md:py-24 px-4 sm:px-6 w-full max-w-7xl mx-auto">
       
       {/* --- DECORATIVE LOW OPACITY CLIENT ASSETS --- */}
+      {/* Maharaja - Central Watermark/Theme */}
+      <div className="fixed top-[20%] left-1/2 -translate-x-1/2 z-0 pointer-events-none opacity-[0.2] mix-blend-multiply animate-float-slow">
+        <img 
+          src="/assets/maharaja.png" 
+          alt="Traditional Maharaja" 
+          className="w-[300px] md:w-[600px] contrast-[1.4] brightness-[1.1]"
+        />
+      </div>
+      
       {/* Aeroplane floating in the top right sky */}
       <div className="fixed top-8 right-8 md:top-12 md:right-12 z-0 pointer-events-none animate-float opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '0s' }}>
         <img 
@@ -56,7 +65,7 @@ const Menu = () => {
         />
       </div>
       {/* Teapot sitting with subtle breath */}
-      <div className="fixed top-[35%] right-[-5%] md:right-4 z-0 pointer-events-none animate-float opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '2.5s' }}>
+      <div className="fixed top-[45%] right-[-5%] md:right-4 z-0 pointer-events-none animate-float opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '2.5s' }}>
         <img 
           src="/assets/teapot.png" 
           alt="Decorative teapot" 
@@ -93,11 +102,11 @@ const Menu = () => {
 
         <div className="text-center mb-16">
           <div className="inline-block relative">
-             <h1 className="text-5xl sm:text-6xl md:text-8xl font-sans font-bold text-ink uppercase tracking-tight mb-2">
+             <h1 className="text-5xl sm:text-7xl md:text-9xl font-serif italic font-medium text-ink uppercase tracking-wider mb-2 drop-shadow-sm">
                 Ancient Sip
              </h1>
-             <div className="absolute -left-8 md:-left-12 top-1/2 -mt-[1px] w-6 md:w-8 border-t-[3px] border-ink hidden sm:block"></div>
-             <div className="absolute -right-8 md:-right-12 top-1/2 -mt-[1px] w-6 md:w-8 border-t-[3px] border-ink hidden sm:block"></div>
+             <div className="absolute -left-10 md:-left-16 top-1/2 -mt-[1px] w-8 md:w-12 border-t-[3px] border-ink hidden sm:block"></div>
+             <div className="absolute -right-10 md:-right-16 top-1/2 -mt-[1px] w-8 md:w-12 border-t-[3px] border-ink hidden sm:block"></div>
           </div>
         </div>
 
