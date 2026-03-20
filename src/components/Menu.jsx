@@ -3,7 +3,7 @@ const Menu = () => {
     {
       title: "Hot Tea",
       desc: "Sunset Ingredients, High Quality Sugar, Full Cream Milk / No Water",
-      funny: "Chai Peene Se Kaale ho hai kya? Chalo Aaj PK Dekhte Hai",
+      funny: "Chai Peene Se Kaale hota hai kya? Chalo Aaj PK Dekhte Hai",
       items: [
         { name: "Desi Chai", desc: "", tall: 15, grande: 20 },
         { name: "Adrak Chai", desc: "Chef Special", tall: 20, grande: 25 },
@@ -118,54 +118,54 @@ const Menu = () => {
 
   return (
     <section className="relative min-h-screen py-16 md:py-24 px-4 sm:px-6 w-full max-w-7xl mx-auto">
-      
+
       {/* --- DECORATIVE LOW OPACITY CLIENT ASSETS --- */}
       {/* Aeroplane floating in the top right sky */}
       <div className="fixed top-8 right-8 md:top-12 md:right-12 z-0 pointer-events-none animate-float opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '0s' }}>
-        <img 
-          src="/assets/aeroplane.png" 
-          alt="Decorative aeroplane" 
+        <img
+          src="/assets/aeroplane.png"
+          alt="Decorative aeroplane"
           className="w-56 md:w-80 blur-[0.2px] rotate-[-6deg] contrast-[1.8] brightness-[1.15]"
         />
       </div>
       {/* Bicycle anchored with a slow sway */}
       <div className="fixed bottom-6 left-6 md:bottom-12 md:left-12 z-0 pointer-events-none animate-float-slow opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '1s' }}>
-        <img 
-          src="/assets/bicycle.png" 
-          alt="Decorative bicycle" 
-          className="w-72 md:w-[450px] blur-[0.2px] rotate-[-8deg] contrast-[1.8] brightness-[1.15]" 
+        <img
+          src="/assets/bicycle.png"
+          alt="Decorative bicycle"
+          className="w-72 md:w-[450px] blur-[0.2px] rotate-[-8deg] contrast-[1.8] brightness-[1.15]"
         />
       </div>
       {/* Teapot sitting with subtle breath */}
       <div className="fixed top-[45%] right-[-5%] md:right-4 z-0 pointer-events-none animate-float opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '2.5s' }}>
-        <img 
-          src="/assets/teapot.png" 
-          alt="Decorative teapot" 
-          className="w-72 md:w-[500px] blur-[0.2px] rotate-[12deg] contrast-[1.8] brightness-[1.15]" 
+        <img
+          src="/assets/teapot.png"
+          alt="Decorative teapot"
+          className="w-72 md:w-[500px] blur-[0.2px] rotate-[12deg] contrast-[1.8] brightness-[1.15]"
         />
       </div>
       {/* Leaves balancing the corners with opposing floats */}
       <div className="fixed -top-10 -left-10 md:-top-16 md:-left-16 z-0 pointer-events-none animate-float-slow opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '0.5s' }}>
-        <img 
-          src="/assets/leaves.png" 
-          alt="Decorative leaves top left" 
-          className="w-64 md:w-[400px] blur-[0.2px] rotate-[-25deg] contrast-[1.8] brightness-[1.15]" 
+        <img
+          src="/assets/leaves.png"
+          alt="Decorative leaves top left"
+          className="w-64 md:w-[400px] blur-[0.2px] rotate-[-25deg] contrast-[1.8] brightness-[1.15]"
         />
       </div>
       <div className="fixed -bottom-10 -right-10 md:-bottom-20 md:-right-20 z-0 pointer-events-none animate-float opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '1.5s' }}>
-        <img 
-          src="/assets/leaves.png" 
-          alt="Decorative leaves bottom right" 
-          className="w-80 md:w-[500px] blur-[0.2px] rotate-[145deg] contrast-[1.8] brightness-[1.15]" 
+        <img
+          src="/assets/leaves.png"
+          alt="Decorative leaves bottom right"
+          className="w-80 md:w-[500px] blur-[0.2px] rotate-[145deg] contrast-[1.8] brightness-[1.15]"
         />
       </div>
 
       {/* --- MAIN MENU CONTENT UI --- */}
-      <div 
-        className="relative z-10 w-full max-w-4xl lg:max-w-5xl mx-auto border-4 border-ink p-6 sm:p-8 md:p-16 bg-transparent animate-fade-in-up" 
+      <div
+        className="relative z-10 w-full max-w-4xl lg:max-w-5xl mx-auto border-4 border-ink p-6 sm:p-8 md:p-16 bg-transparent animate-fade-in-up"
         style={{ animationDelay: '0.2s' }}
       >
-        
+
         {/* Corner Ornaments for the border */}
         <div className="absolute -top-3 -left-3 w-6 h-6 border-[3px] border-ink bg-vintage rotate-45"></div>
         <div className="absolute -top-3 -right-3 w-6 h-6 border-[3px] border-ink bg-vintage rotate-45"></div>
@@ -174,18 +174,18 @@ const Menu = () => {
 
         <div className="text-center mb-16">
           <div className="inline-block relative">
-             <h1 className="text-5xl sm:text-7xl md:text-9xl font-serif italic font-medium text-ink uppercase tracking-wider mb-2 drop-shadow-sm">
-                Ancient Sip
-             </h1>
-             <div className="absolute -left-10 md:-left-16 top-1/2 -mt-[1px] w-8 md:w-12 border-t-[3px] border-ink hidden sm:block"></div>
-             <div className="absolute -right-10 md:-right-16 top-1/2 -mt-[1px] w-8 md:w-12 border-t-[3px] border-ink hidden sm:block"></div>
+            <h1 className="text-5xl sm:text-7xl md:text-9xl font-serif italic font-medium text-ink uppercase tracking-wider mb-2 drop-shadow-sm">
+              Ancient Sip
+            </h1>
+            <div className="absolute -left-10 md:-left-16 top-1/2 -mt-[1px] w-8 md:w-12 border-t-[3px] border-ink hidden sm:block"></div>
+            <div className="absolute -right-10 md:-right-16 top-1/2 -mt-[1px] w-8 md:w-12 border-t-[3px] border-ink hidden sm:block"></div>
           </div>
         </div>
 
         <div className="space-y-20">
           {menuCategories.map((category, catIdx) => (
             <div key={catIdx} className="relative">
-              
+
               <div className="text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-serif italic text-ink inline-block px-6 border-b-2 border-double border-ink relative z-10 mb-4">
                   {category.title}
@@ -216,7 +216,7 @@ const Menu = () => {
                           </p>
                         )}
                       </div>
-                      
+
                       {/* Dotted Leader (hidden on mobile, visible on larger screens) */}
                       <div className="hidden sm:flex flex-grow border-b-2 border-dotted border-ink/40 mx-4 relative top-[-8px]"></div>
 
@@ -235,7 +235,7 @@ const Menu = () => {
                   </div>
                 ))}
               </div>
-              
+
               {catIdx < menuCategories.length - 1 && (
                 <div className="w-full flex justify-center mt-14 mb-[-1rem] opacity-50">
                   <span className="text-ink">☙ ✤ ❧</span>
