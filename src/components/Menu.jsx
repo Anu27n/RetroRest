@@ -1,7 +1,9 @@
-const Menu = () => {
+import CamelCourierBanner from './CamelCourierBanner';
+
+const Menu = ({ introComplete = true }) => {
   const menuCategories = [
     {
-      title: "Hot Tea",
+      title: "Hot Sips",
       desc: "Sunset Ingredients, High Quality Sugar, Full Cream Milk / No Water",
       funny: "Chai Peene Se Kaale hota hai kya? Chalo Aaj PK Dekhte Hai",
       items: [
@@ -26,7 +28,7 @@ const Menu = () => {
       ]
     },
     {
-      title: "Green-Teas",
+      title: "Hue of Teas",
       desc: "Non-Milk Base, No-Sugar No-Honey, Bitter in Taste",
       funny: "Ye PK Star Banuga",
       items: [
@@ -38,7 +40,7 @@ const Menu = () => {
       ]
     },
     {
-      title: "Detox-Camp",
+      title: "Detox Sip",
       desc: "Slow steeped for 24 hours in processed water",
       funny: "Aaj Body ki Servicing Karani Hai",
       items: [
@@ -113,6 +115,26 @@ const Menu = () => {
         { name: "Strawberry Smoothies", desc: "", tall: 99, grande: 119 },
         { name: "Blueberry Smoothies", desc: "Chef Special", tall: 99, grande: 119 }
       ]
+    },
+    {
+      title: "Fresh FruitBall",
+      desc: "Fresh bowls and crunch, straight from the cart",
+      funny: "Thoda meetha, thoda chatpata",
+      items: [
+        { name: "Cream Berry Granola", desc: "", tall: 89, grande: 109 },
+        { name: "Blue Berry and Grapes", desc: "", tall: 89, grande: 109 }
+      ]
+    },
+    {
+      title: "Smoothie Sip",
+      desc: "Blended fruit, full cream or toned milk — sip slow",
+      funny: "Gala taazaa, mood halka",
+      items: [
+        { name: "Blue Berry Smoothie", desc: "", tall: 99, grande: 119 },
+        { name: "Cream Berry Smoothie", desc: "", tall: 99, grande: 119 },
+        { name: "Strawberry Smoothie", desc: "", tall: 99, grande: 119 },
+        { name: "Mix Berry Smoothie", desc: "", tall: 99, grande: 119 }
+      ]
     }
   ];
 
@@ -162,8 +184,7 @@ const Menu = () => {
 
       {/* --- MAIN MENU CONTENT UI --- */}
       <div
-        className="relative z-10 w-full max-w-4xl lg:max-w-5xl mx-auto border-4 border-ink p-6 sm:p-8 md:p-16 bg-transparent animate-fade-in-up"
-        style={{ animationDelay: '0.2s' }}
+        className={`relative z-10 w-full max-w-4xl lg:max-w-5xl mx-auto border-4 border-ink p-6 sm:p-8 md:p-16 bg-transparent ${introComplete ? 'animate-menu-reveal' : 'opacity-0 pointer-events-none select-none'}`}
       >
 
         {/* Corner Ornaments for the border */}
@@ -180,6 +201,10 @@ const Menu = () => {
             <div className="absolute -left-10 md:-left-16 top-1/2 -mt-[1px] w-8 md:w-12 border-t-[3px] border-ink hidden sm:block"></div>
             <div className="absolute -right-10 md:-right-16 top-1/2 -mt-[1px] w-8 md:w-12 border-t-[3px] border-ink hidden sm:block"></div>
           </div>
+        </div>
+
+        <div className="mb-12 max-w-2xl mx-auto">
+          <CamelCourierBanner />
         </div>
 
         <div className="space-y-20">
