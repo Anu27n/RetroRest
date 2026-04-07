@@ -1,19 +1,16 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
-const DOOR_MS = 1900;
-const LIGHT_DELAY_MS = 180;
+const WINDOW_HOLD_MS = 700;
+const LIGHT_DELAY_MS = 220;
 const TEA_DELAY_MS = 500;
 const TEA_HOLD_MS = 3200;
 const EXIT_FADE_MS = 950;
-const doorEase = [0.42, 0, 0.58, 1];
 
 export default function IntroSequence({ onComplete, audioRef }) {
   const rid = useId().replace(/:/g, '');
   const reduceMotion = useReducedMotion();
 
-  const [started, setStarted] = useState(false);
-  const [doorsOpen, setDoorsOpen] = useState(false);
   const [lightOn, setLightOn] = useState(false);
   const [teaOn, setTeaOn] = useState(false);
   const [exiting, setExiting] = useState(false);
@@ -44,13 +41,12 @@ export default function IntroSequence({ onComplete, audioRef }) {
   }, []);
 
   useEffect(() => {
-    if (!doorsOpen) return;
     queue(() => {
       setLightOn(true);
       audioRef.current?.play().catch(() => {});
-    }, (reduceMotion ? 0 : DOOR_MS) + LIGHT_DELAY_MS);
+    }, (reduceMotion ? 0 : WINDOW_HOLD_MS) + LIGHT_DELAY_MS);
     return clearTimers;
-  }, [doorsOpen, reduceMotion, queue, clearTimers]);
+  }, [reduceMotion, queue, clearTimers, audioRef]);
 
   useEffect(() => {
     if (!lightOn) return;
@@ -70,18 +66,6 @@ export default function IntroSequence({ onComplete, audioRef }) {
     return clearTimers;
   }, [exiting, finish, queue, clearTimers]);
 
-  const onBegin = () => {
-    if (started) return;
-    setStarted(true);
-    if (reduceMotion) {
-      setDoorsOpen(true); setLightOn(true); setTeaOn(true);
-      audioRef.current?.play().catch(() => {});
-      return;
-    }
-    queue(() => setDoorsOpen(true), 100);
-  };
-
-  const dt = reduceMotion ? { duration: 0.01 } : { duration: DOOR_MS / 1000, ease: doorEase };
   const ink = '#3A2515';
 
   return (
@@ -93,26 +77,41 @@ export default function IntroSequence({ onComplete, audioRef }) {
     >
       <button type="button" className="intro-cin__skip" onClick={skip}>Skip intro</button>
 
-      {!started && (
-        <div className="intro-cin__curtain">
-          <p className="intro-cin__tap">Tap to enter the haveli</p>
-          <button type="button" className="intro-cin__begin" onClick={onBegin}>☙ Begin ❧</button>
-        </div>
-      )}
-
       <div className="intro-cin__stage">
         {/* ─── ORNATE DOOR (pure SVG, inspired by reference) ─── */}
         <div className="intro-cin__door-wrap">
-          {/* Glow behind doors */}
+          {/* Diffuse glow + hot core (behind line art) */}
           <motion.div
-            className="intro-cin__glow"
+            className="intro-cin__glow intro-cin__glow--diffuse"
             initial={false}
-            animate={{ opacity: lightOn ? 0.6 : 0, scale: lightOn ? 1 : 0.85 }}
-            transition={{ duration: reduceMotion ? 0.01 : 1.2, ease: 'easeOut' }}
+            animate={{ opacity: lightOn ? 1 : 0, scale: lightOn ? 1 : 0.82 }}
+            transition={{ duration: reduceMotion ? 0.01 : 1.35, ease: 'easeOut' }}
+          />
+          <motion.div
+            className="intro-cin__glow intro-cin__glow--core"
+            initial={false}
+            animate={{ opacity: lightOn ? 1 : 0, scale: lightOn ? 1 : 0.9 }}
+            transition={{ duration: reduceMotion ? 0.01 : 1.1, ease: 'easeOut', delay: 0.05 }}
           />
 
           <svg className="intro-cin__door-svg" viewBox="0 0 300 420" fill="none">
-            {/* Outer arch frame */}
+            <defs>
+              <radialGradient id={`${rid}-opening`} cx="50%" cy="32%" r="72%">
+                <stop offset="0%" stopColor="#fffef5" stopOpacity="0.98" />
+                <stop offset="35%" stopColor="#ffefbc" stopOpacity="0.88" />
+                <stop offset="62%" stopColor="#f0d48a" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#e4c896" stopOpacity="0.12" />
+              </radialGradient>
+            </defs>
+            {/* Warm light fills the window opening (visible through strokes) */}
+            <motion.path
+              d="M 34 392 L 34 126 A 116 108 0 0 1 266 126 L 266 392 Z"
+              fill={`url(#${rid}-opening)`}
+              stroke="none"
+              initial={false}
+              animate={{ opacity: lightOn ? 1 : 0 }}
+              transition={{ duration: reduceMotion ? 0.01 : 1.2, ease: 'easeOut' }}
+            />
             <path d="M 20 400 L 20 120 A 130 120 0 0 1 280 120 L 280 400 Z"
               fill="none" stroke={ink} strokeWidth="5" />
             {/* Inner arch frame */}
@@ -204,28 +203,12 @@ export default function IntroSequence({ onComplete, audioRef }) {
             </g>
           </svg>
 
-          {/* Animated door panels — sit over SVG pane area */}
-          <div className="intro-cin__panels">
-            <motion.div
-              className="intro-cin__panel intro-cin__panel--l"
-              initial={false}
-              animate={{ rotateY: doorsOpen ? -75 : 0 }}
-              transition={dt}
-            />
-            <motion.div
-              className="intro-cin__panel intro-cin__panel--r"
-              initial={false}
-              animate={{ rotateY: doorsOpen ? 75 : 0 }}
-              transition={dt}
-            />
-          </div>
-
           {/* Light rays */}
           <motion.div
             className="intro-cin__rays"
             initial={false}
-            animate={{ opacity: lightOn ? 0.75 : 0, scaleY: lightOn ? 1 : 0.25 }}
-            transition={{ duration: reduceMotion ? 0.01 : 1.3, ease: 'easeOut', delay: 0.1 }}
+            animate={{ opacity: lightOn ? 1 : 0, scaleY: lightOn ? 1 : 0.12 }}
+            transition={{ duration: reduceMotion ? 0.01 : 1.45, ease: 'easeOut', delay: 0.06 }}
           />
         </div>
 
