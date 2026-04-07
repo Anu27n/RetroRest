@@ -1,10 +1,12 @@
 import { motion, useReducedMotion } from 'framer-motion';
+import { GiCamel } from 'react-icons/gi';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 const WINDOW_HOLD_MS = 700;
 const LIGHT_DELAY_MS = 220;
 const TEA_DELAY_MS = 500;
-const TEA_HOLD_MS = 3200;
+const TEA_POUR_MS = 2800;
+const TEA_HOLD_MS = 3800;
 const EXIT_FADE_MS = 950;
 
 export default function IntroSequence({ onComplete, audioRef }) {
@@ -67,6 +69,7 @@ export default function IntroSequence({ onComplete, audioRef }) {
   }, [exiting, finish, queue, clearTimers]);
 
   const ink = '#3A2515';
+  const pour = reduceMotion ? 0.01 : TEA_POUR_MS / 1000;
 
   return (
     <motion.div
@@ -210,103 +213,255 @@ export default function IntroSequence({ onComplete, audioRef }) {
             animate={{ opacity: lightOn ? 1 : 0, scaleY: lightOn ? 1 : 0.12 }}
             transition={{ duration: reduceMotion ? 0.01 : 1.45, ease: 'easeOut', delay: 0.06 }}
           />
+
+          <motion.div
+            className="intro-cin__camel intro-cin__camel--left"
+            initial={false}
+            animate={reduceMotion ? { opacity: 0.65 } : { x: [0, -8, 0, 8, 0], y: [0, -2, 0, -2, 0], rotate: [0, -2, 0, 2, 0], opacity: [0.55, 0.75, 0.75, 0.75, 0.55] }}
+            transition={reduceMotion ? { duration: 0.01 } : { duration: 2.7, repeat: Infinity, ease: 'easeInOut' }}
+            aria-hidden
+          >
+            <GiCamel className="intro-cin__camel-icon" />
+          </motion.div>
+
+          <motion.div
+            className="intro-cin__camel intro-cin__camel--right"
+            initial={false}
+            animate={reduceMotion ? { opacity: 0.65 } : { x: [0, 8, 0, -8, 0], y: [0, -2, 0, -2, 0], rotate: [0, 2, 0, -2, 0], opacity: [0.55, 0.75, 0.75, 0.75, 0.55] }}
+            transition={reduceMotion ? { duration: 0.01 } : { duration: 2.7, repeat: Infinity, ease: 'easeInOut', delay: 0.35 }}
+            aria-hidden
+          >
+            <GiCamel className="intro-cin__camel-icon" />
+          </motion.div>
         </div>
 
-        {/* ─── TEA POUR (bigger, retro line-art) ─── */}
+        {/* ─── TEA: custom vintage teapot (inspired by reference), masked chai drains as cup fills ─── */}
         <motion.div
-          className="intro-cin__tea"
+          className="intro-cin__tea intro-cin__tea--retro"
           initial={false}
           animate={{ opacity: teaOn ? 1 : 0, y: teaOn ? 0 : 16 }}
-          transition={{ duration: reduceMotion ? 0.01 : 0.7, ease: 'easeOut' }}
+          transition={{ duration: reduceMotion ? 0.01 : 0.65, ease: 'easeOut' }}
         >
-          <svg viewBox="0 0 320 180" className="intro-cin__tea-svg" aria-hidden>
+          <svg viewBox="0 0 400 210" className="intro-cin__tea-svg" aria-hidden>
             <defs>
-              <linearGradient id={`${rid}-ts`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#6B4423" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#A67C52" stopOpacity="0.35" />
+              <radialGradient id={`${rid}-potChai`} cx="42%" cy="40%" r="68%">
+                <stop offset="0%" stopColor="#c99548" stopOpacity="0.92" />
+                <stop offset="55%" stopColor="#8b5425" stopOpacity="0.88" />
+                <stop offset="100%" stopColor="#5c3618" stopOpacity="0.85" />
+              </radialGradient>
+              <linearGradient id={`${rid}-stream`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#a06830" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#6b3e1a" stopOpacity="0.55" />
               </linearGradient>
-              <linearGradient id={`${rid}-lq`} x1="0" y1="1" x2="0" y2="0">
-                <stop offset="0%" stopColor="#5C3820" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="#967052" stopOpacity="0.4" />
+              <linearGradient id={`${rid}-cupChai`} x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0%" stopColor="#5c3618" stopOpacity="0.92" />
+                <stop offset="100%" stopColor="#b07a3c" stopOpacity="0.55" />
               </linearGradient>
+              <clipPath id={`${rid}-potBody`}>
+                <ellipse cx="96" cy="106" rx="35" ry="33" />
+              </clipPath>
+              <mask id={`${rid}-potLevel`} maskUnits="userSpaceOnUse">
+                <rect x="0" y="0" width="400" height="220" fill="black" />
+                <motion.rect
+                  fill="white"
+                  rx="10"
+                  ry="10"
+                  initial={{ x: 52, y: 44, width: 88, height: 96 }}
+                  animate={
+                    teaOn
+                      ? reduceMotion
+                        ? { x: 52, y: 122, width: 88, height: 18 }
+                        : { x: 52, y: [44, 44, 122], width: 88, height: [96, 96, 18] }
+                      : { x: 52, y: 44, width: 88, height: 96 }
+                  }
+                  transition={{
+                    duration: pour,
+                    ease: [0.33, 0, 0.2, 1],
+                    ...(reduceMotion ? {} : { times: [0, 0.2, 1] }),
+                  }}
+                />
+              </mask>
+              <clipPath id={`${rid}-cupIn`}>
+                <path d="M 244 96 L 244 152 Q 244 164 258 164 L 310 164 Q 324 164 324 152 L 324 96 Z" />
+              </clipPath>
             </defs>
 
-            {/* Saucer */}
-            <ellipse cx="222" cy="154" rx="52" ry="10" fill="none" stroke={ink} strokeWidth="2" opacity="0.45" />
+            {/* Cup + saucer (static, drawn first) */}
+            <ellipse cx="284" cy="170" rx="56" ry="10" fill="none" stroke={ink} strokeWidth="1.8" opacity="0.55" />
+            <path
+              d="M 240 92 L 240 149 Q 240 162 256 162 L 312 162 Q 328 162 328 149 L 328 92 Z"
+              fill="none"
+              stroke={ink}
+              strokeWidth="2.2"
+            />
+            <path d="M 328 104 Q 348 104 348 126 Q 348 148 328 145" fill="none" stroke={ink} strokeWidth="2" />
+            <line x1="236" y1="92" x2="332" y2="92" stroke={ink} strokeWidth="2.8" strokeLinecap="round" />
 
-            {/* Cup */}
-            <path d="M 178 84 L 178 138 Q 178 150 194 150 L 250 150 Q 266 150 266 138 L 266 84 Z"
-              fill="none" stroke={ink} strokeWidth="2.5" />
-            {/* Cup handle */}
-            <path d="M 266 96 Q 286 96 286 118 Q 286 140 266 138" fill="none" stroke={ink} strokeWidth="2.2" />
-            {/* Rim */}
-            <line x1="174" y1="84" x2="270" y2="84" stroke={ink} strokeWidth="3" strokeLinecap="round" />
-            {/* Cup decorative band */}
-            <line x1="180" y1="100" x2="264" y2="100" stroke={ink} strokeWidth="0.8" opacity="0.4" />
-
-            {/* Tea liquid */}
-            <clipPath id={`${rid}-cc`}>
-              <path d="M 180 86 L 180 136 Q 180 148 196 148 L 248 148 Q 264 148 264 136 L 264 86 Z" />
-            </clipPath>
-            <g clipPath={`url(#${rid}-cc)`}>
-              <motion.rect x="178" y="92" width="90" height="60" fill={`url(#${rid}-lq)`}
-                initial={false}
-                animate={{ scaleY: teaOn ? 1 : 0.08 }}
-                transition={{ duration: reduceMotion ? 0.01 : 2.6, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-                style={{ transformBox: 'fill-box', transformOrigin: '50% 100%' }}
+            <g clipPath={`url(#${rid}-cupIn)`}>
+              <motion.rect
+                x="238"
+                width="92"
+                fill={`url(#${rid}-cupChai)`}
+                initial={{ y: 161, height: 4 }}
+                animate={
+                  teaOn
+                    ? reduceMotion
+                      ? { y: 98, height: 67 }
+                      : { y: [161, 161, 98], height: [4, 4, 67] }
+                    : { y: 161, height: 4 }
+                }
+                transition={{
+                  duration: pour,
+                  ease: [0.33, 0, 0.2, 1],
+                  ...(reduceMotion ? {} : { times: [0, 0.24, 1] }),
+                }}
               />
             </g>
 
-            {/* Steam wisps */}
-            <motion.g opacity={0.4}
-              initial={false}
-              animate={{ opacity: teaOn ? 0.4 : 0 }}
-              transition={{ duration: 1, delay: 1.2 }}
-            >
-              <path d="M 210 70 Q 216 54 208 38 Q 204 28 212 16" fill="none" stroke={ink} strokeWidth="1.3" opacity="0.4">
-                <animate attributeName="d" dur="2.5s" repeatCount="indefinite"
-                  values="M 210 70 Q 216 54 208 38 Q 204 28 212 16;M 210 70 Q 204 52 212 36 Q 218 24 210 14;M 210 70 Q 216 54 208 38 Q 204 28 212 16" />
-              </path>
-              <path d="M 232 72 Q 240 56 230 38" fill="none" stroke={ink} strokeWidth="1.2" opacity="0.35">
-                <animate attributeName="d" dur="2.8s" repeatCount="indefinite"
-                  values="M 232 72 Q 240 56 230 38;M 232 72 Q 224 54 234 36;M 232 72 Q 240 56 230 38" />
-              </path>
-              <path d="M 250 74 Q 258 60 248 44" fill="none" stroke={ink} strokeWidth="1.1" opacity="0.3">
-                <animate attributeName="d" dur="3s" repeatCount="indefinite"
-                  values="M 250 74 Q 258 60 248 44;M 250 74 Q 242 58 252 42;M 250 74 Q 258 60 248 44" />
-              </path>
-            </motion.g>
-
-            {/* Teapot */}
+            {/* Teapot: chai layer + bespoke engraving-style line art, tilt + pour */}
             <motion.g
-              style={{ transformOrigin: '146px 116px' }}
+              style={{ transformOrigin: '96px 158px', transformBox: 'fill-box' }}
               initial={false}
-              animate={{ rotate: teaOn ? -16 : 0 }}
-              transition={{ duration: reduceMotion ? 0.01 : 2.4, ease: 'easeInOut' }}
+              animate={
+                teaOn
+                  ? reduceMotion
+                    ? { rotate: -17 }
+                    : { rotate: [0, 0, -17] }
+                  : { rotate: 0 }
+              }
+              transition={{
+                duration: pour,
+                ease: [0.33, 0, 0.2, 1],
+                ...(reduceMotion ? {} : { times: [0, 0.18, 1] }),
+              }}
             >
-              <ellipse cx="90" cy="122" rx="48" ry="34" fill="none" stroke={ink} strokeWidth="2.5" />
-              {/* Decorative band */}
-              <ellipse cx="90" cy="122" rx="48" ry="16" fill="none" stroke={ink} strokeWidth="0.9" opacity="0.35" />
-              {/* Spout */}
-              <path d="M 134 102 Q 156 88 174 80 L 178 88 Q 158 98 138 108" fill="none" stroke={ink} strokeWidth="2.2" />
-              {/* Handle */}
-              <path d="M 44 104 Q 24 104 24 124 Q 24 144 46 146" fill="none" stroke={ink} strokeWidth="2.5" />
-              {/* Lid */}
-              <path d="M 50 90 Q 90 68 130 90" fill="none" stroke={ink} strokeWidth="2.2" />
-              {/* Knob */}
-              <circle cx="90" cy="74" r="7" fill="none" stroke={ink} strokeWidth="1.8" />
-              {/* Decorative lines on pot */}
-              <path d="M 56 108 Q 90 96 124 108" fill="none" stroke={ink} strokeWidth="0.7" opacity="0.35" />
+              <g clipPath={`url(#${rid}-potBody)`} mask={`url(#${rid}-potLevel)`}>
+                <rect x="40" y="36" width="112" height="118" fill={`url(#${rid}-potChai)`} />
+              </g>
+
+              <g
+                stroke={ink}
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="intro-cin__teapot-draw"
+              >
+                {/* Foot / base flare */}
+                <path
+                  d="M 58 152 Q 96 168 134 152 L 132 146 Q 96 156 60 146 Z"
+                  strokeWidth="2.1"
+                  opacity="0.92"
+                />
+                <path d="M 64 148 Q 96 154 128 148" strokeWidth="1" opacity="0.4" />
+
+                {/* Main bulb body — vintage silhouette */}
+                <path
+                  d="M 60 146 
+                     C 52 130 50 98 56 76 
+                     C 62 52 78 44 96 42 
+                     C 114 44 130 52 136 76 
+                     C 142 98 140 130 132 146"
+                  strokeWidth="2.35"
+                />
+                <path
+                  d="M 66 138 C 60 118 60 90 68 72 C 76 58 88 50 96 48 C 104 50 116 58 124 72 C 132 90 132 118 126 138"
+                  strokeWidth="1"
+                  opacity="0.45"
+                />
+
+                {/* Upper shoulder band + bead row */}
+                <path d="M 64 78 Q 96 70 128 78" strokeWidth="1.2" opacity="0.55" />
+                {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+                  <circle key={i} cx={72 + i * 7} cy="76" r="1.1" fill={ink} stroke="none" opacity="0.5" />
+                ))}
+
+                {/* Mid waist band with filigree ticks */}
+                <path d="M 62 112 Q 96 106 130 112" strokeWidth="1" opacity="0.5" />
+                <path d="M 68 110 L 68 116 M 80 109 L 80 117 M 96 108 L 96 118 M 112 109 L 112 117 M 124 110 L 124 116" strokeWidth="0.9" opacity="0.38" />
+
+                {/* Central floral / scroll motif (symmetrical engraving) */}
+                <path d="M 96 118 C 88 108 88 96 96 92 C 104 96 104 108 96 118" strokeWidth="1.15" opacity="0.7" />
+                <path d="M 96 92 C 92 88 90 84 92 80 C 94 78 98 78 100 80" strokeWidth="0.9" opacity="0.55" />
+                <path d="M 96 92 C 100 88 102 84 100 80 C 98 78 94 78 92 80" strokeWidth="0.9" opacity="0.55" />
+                <path d="M 96 118 L 96 128" strokeWidth="0.85" opacity="0.45" />
+                <path d="M 82 104 Q 76 100 74 96 Q 78 92 84 96" strokeWidth="0.85" opacity="0.5" />
+                <path d="M 110 104 Q 116 100 118 96 Q 114 92 108 96" strokeWidth="0.85" opacity="0.5" />
+
+                {/* Light cross-hatch shading (woodcut feel) */}
+                <g strokeWidth="0.45" opacity="0.22">
+                  <line x1="74" y1="86" x2="82" y2="94" />
+                  <line x1="70" y1="92" x2="78" y2="100" />
+                  <line x1="110" y1="86" x2="118" y2="94" />
+                  <line x1="114" y1="92" x2="122" y2="100" />
+                  <line x1="78" y1="124" x2="86" y2="132" />
+                  <line x1="104" y1="124" x2="112" y2="132" />
+                </g>
+
+                {/* Lid dome + finial */}
+                <path d="M 72 48 Q 96 28 120 48" strokeWidth="2" />
+                <path d="M 78 48 Q 96 36 114 48" strokeWidth="1" opacity="0.45" />
+                <path d="M 84 46 Q 96 40 108 46" strokeWidth="0.9" opacity="0.38" />
+                <circle cx="96" cy="32" r="5.5" strokeWidth="1.6" />
+                <path d="M 96 27 L 96 24" strokeWidth="1.2" />
+                <circle cx="96" cy="23" r="2" strokeWidth="1" />
+
+                {/* Spout — long curve (pour tip ~168, 76) */}
+                <path
+                  d="M 126 64 C 142 56 158 52 172 58 C 182 62 186 68 184 74 C 182 80 174 82 166 78"
+                  strokeWidth="2.15"
+                />
+                <path d="M 134 62 C 150 56 166 58 174 66" strokeWidth="1" opacity="0.4" />
+                <path d="M 140 66 L 146 72 M 152 64 L 158 70" strokeWidth="0.75" opacity="0.32" />
+
+                {/* Ornate handle — scroll ends */}
+                <path
+                  d="M 58 70 C 38 64 28 82 30 102 C 32 122 44 138 56 142 C 58 130 54 118 54 102 C 54 90 56 78 58 70"
+                  strokeWidth="2.25"
+                />
+                <path d="M 48 78 Q 40 88 40 100 Q 40 114 50 128" strokeWidth="1" opacity="0.42" />
+                <path
+                  d="M 34 98 Q 30 96 28 100 Q 30 104 34 102"
+                  strokeWidth="0.9"
+                  opacity="0.5"
+                />
+              </g>
+
+              <motion.path
+                d="M 168 76 C 198 82 238 90 276 98 C 298 102 316 100 318 94"
+                fill="none"
+                stroke={`url(#${rid}-stream)`}
+                strokeWidth="3.2"
+                strokeLinecap="round"
+                initial={false}
+                animate={
+                  teaOn
+                    ? reduceMotion
+                      ? { pathLength: 1, opacity: 0 }
+                      : { pathLength: [0, 0, 1, 1, 0], opacity: [0, 0, 1, 0.85, 0] }
+                    : { pathLength: 0, opacity: 0 }
+                }
+                transition={{
+                  duration: pour,
+                  ease: 'easeInOut',
+                  ...(reduceMotion ? {} : { times: [0, 0.2, 0.3, 0.8, 1] }),
+                }}
+              />
             </motion.g>
 
-            {/* Tea stream */}
-            <motion.path
-              d="M 174 80 Q 182 100 196 126 Q 208 142 222 138"
-              fill="none" stroke={`url(#${rid}-ts)`} strokeWidth="3.2" strokeLinecap="round"
+            <motion.g
               initial={false}
-              animate={teaOn ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
-              transition={{ duration: reduceMotion ? 0.01 : 2.2, ease: 'easeOut', delay: 0.15 }}
-            />
+              animate={{ opacity: teaOn ? 0.42 : 0 }}
+              transition={{ duration: 0.9, delay: reduceMotion ? 0 : 1.1 }}
+            >
+              <path d="M 272 78 Q 278 62 270 46 Q 264 34 274 20" fill="none" stroke={ink} strokeWidth="1.2" opacity="0.4">
+                <animate
+                  attributeName="d"
+                  dur="2.6s"
+                  repeatCount="indefinite"
+                  values="M 272 78 Q 278 62 270 46 Q 264 34 274 20;M 272 78 Q 266 60 276 44 Q 284 30 272 18;M 272 78 Q 278 62 270 46 Q 264 34 274 20"
+                />
+              </path>
+            </motion.g>
           </svg>
         </motion.div>
       </div>

@@ -15,30 +15,66 @@
   --font-serif: "Cormorant Garamond", serif;
   --font-typewriter: "Special Elite", monospace;
 
-  /* Grainy, aged paper texture */
-  --background-image-aged-paper: url('https://www.transparenttextures.com/patterns/worn-dots.png'), linear-gradient(to bottom, #D9C5A8, #E2CEB2, #D2B795);
+  /* Aged paper: dot grain + faint print lines + foxing + warm base (sepia postcard feel) */
+  --retro-paper-base: #c4a884;
+  --background-image-aged-paper:
+    url('https://www.transparenttextures.com/patterns/worn-dots.png'),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(44, 26, 18, 0.028) 3px,
+      rgba(44, 26, 18, 0.028) 4px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(44, 26, 18, 0.14) 0%,
+      rgba(44, 26, 18, 0.04) 12%,
+      transparent 28%,
+      transparent 72%,
+      rgba(44, 26, 18, 0.06) 88%,
+      rgba(44, 26, 18, 0.16) 100%
+    ),
+    radial-gradient(ellipse 130% 75% at 50% -8%, rgba(255, 242, 218, 0.5) 0%, transparent 52%),
+    radial-gradient(ellipse 55% 40% at 92% 88%, rgba(101, 72, 48, 0.11) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 38% at 8% 92%, rgba(74, 52, 36, 0.1) 0%, transparent 52%),
+    linear-gradient(
+      158deg,
+      #b89b76 0%,
+      #d2c0a4 20%,
+      #ebe3d2 42%,
+      #d8c8ae 62%,
+      #c6ab88 82%,
+      #a67f58 100%
+    );
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    background-color: var(--retro-paper-base);
   }
 
   body {
+    background-color: var(--retro-paper-base);
     background-image: var(--background-image-aged-paper);
-    background-color: var(--color-vintage);
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: auto, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+    background-blend-mode: multiply, normal, multiply, soft-light, multiply, multiply, normal;
     color: var(--color-ink);
     font-family: var(--font-serif);
     -webkit-font-smoothing: antialiased;
-    /* Simulate printed texture slightly */
-    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.09);
   }
 
   body::before {
     content: "";
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    box-shadow: inset 0 0 150px rgba(44, 26, 18, 0.4);
+    box-shadow:
+      inset 0 0 220px rgba(34, 20, 12, 0.48),
+      inset 0 0 70px rgba(44, 26, 18, 0.2);
     pointer-events: none;
     z-index: 9998;
   }
@@ -47,8 +83,8 @@
     content: "";
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.25;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.22;
     pointer-events: none;
     z-index: 9999;
     mix-blend-mode: overlay;
@@ -128,9 +164,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--retro-paper-base);
     background-image: var(--background-image-aged-paper);
-    background-color: var(--color-vintage);
-    box-shadow: inset 0 0 120px rgba(44, 26, 18, 0.35);
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: auto, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    background-blend-mode: multiply, normal, multiply, soft-light, multiply, multiply, normal;
+    box-shadow:
+      inset 0 0 200px rgba(34, 20, 12, 0.42),
+      inset 0 0 60px rgba(62, 40, 26, 0.14);
     pointer-events: auto;
     overflow-y: auto;
   }
@@ -242,6 +283,40 @@
     filter: blur(1.5px);
   }
 
+  .intro-cin__camel {
+    position: absolute;
+    bottom: 2%;
+    width: clamp(56px, 10vw, 86px);
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0.68;
+    transform-origin: 50% 88%;
+    filter: drop-shadow(0 2px 5px rgba(44, 26, 18, 0.22));
+  }
+
+  .intro-cin__camel--left {
+    left: -24%;
+  }
+
+  .intro-cin__camel--right {
+    right: -24%;
+    transform: scaleX(-1);
+  }
+
+  .intro-cin__camel-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .intro-cin__camel-icon {
+    display: block;
+    width: 100%;
+    height: auto;
+    color: rgba(44, 26, 18, 0.92);
+    filter: sepia(0.1);
+  }
+
   /* ── Tea scene ── */
   .intro-cin__tea {
     width: min(94vw, 360px);
@@ -251,6 +326,10 @@
     width: 100%;
     height: auto;
     overflow: visible;
+  }
+
+  .intro-cin__tea--retro .intro-cin__tea-svg {
+    filter: sepia(0.12) contrast(1.06);
   }
 
   /* —— Camel courier banner —— */
