@@ -317,6 +317,32 @@
     filter: sepia(0.1);
   }
 
+  @media (max-width: 768px) {
+    .intro-cin__camel {
+      bottom: 5%;
+      width: clamp(44px, 14vw, 66px);
+      opacity: 0.72;
+    }
+
+    .intro-cin__camel--left {
+      left: -8%;
+    }
+
+    .intro-cin__camel--right {
+      right: -8%;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .intro-cin__camel--left {
+      left: -2%;
+    }
+
+    .intro-cin__camel--right {
+      right: -2%;
+    }
+  }
+
   /* ── Tea scene ── */
   .intro-cin__tea {
     width: min(94vw, 360px);
