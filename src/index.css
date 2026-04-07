@@ -118,10 +118,10 @@
   }
 
   /* ══════════════════════════════════════════════════════
-     Cinematic intro (Framer Motion) — aged paper, doors, light, tea
+     Cinematic intro — ornate SVG haveli door, glow, tea
      ══════════════════════════════════════════════════════ */
 
-  .intro-cinematic {
+  .intro-cin {
     position: fixed;
     inset: 0;
     z-index: 10050;
@@ -132,197 +132,173 @@
     background-color: var(--color-vintage);
     box-shadow: inset 0 0 120px rgba(44, 26, 18, 0.35);
     pointer-events: auto;
+    overflow-y: auto;
   }
 
-  .intro-cinematic__inner {
-    position: relative;
-    width: 100%;
-    max-width: 42rem;
-    min-height: min(100dvh, 100vh);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.25rem;
-    box-sizing: border-box;
-  }
-
-  .intro-cinematic__skip {
-    position: absolute;
+  .intro-cin__skip {
+    position: fixed;
     top: 1rem;
     right: 1rem;
-    z-index: 20;
+    z-index: 10060;
     font-family: var(--font-typewriter);
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
+    font-size: 0.62rem;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
     color: var(--color-ink);
-    background: rgba(228, 214, 196, 0.65);
+    background: rgba(228, 214, 196, 0.7);
     border: 2px solid var(--color-ink);
-    padding: 0.45rem 0.65rem;
+    padding: 0.4rem 0.6rem;
     cursor: pointer;
   }
+  .intro-cin__skip:hover { background: rgba(214, 194, 169, 0.9); }
 
-  .intro-cinematic__skip:hover {
-    background: rgba(214, 194, 169, 0.85);
-  }
-
-  .intro-cinematic__skip:focus-visible {
-    outline: 2px solid var(--color-ink);
-    outline-offset: 2px;
-  }
-
-  .intro-cinematic__curtain {
-    position: absolute;
+  .intro-cin__curtain {
+    position: fixed;
     inset: 0;
-    z-index: 15;
+    z-index: 10055;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(214, 194, 169, 0.35);
-    backdrop-filter: blur(1px);
+    gap: 0.8rem;
+    background: rgba(214, 194, 169, 0.4);
+    backdrop-filter: blur(2px);
   }
-
-  .intro-cinematic__begin {
+  .intro-cin__tap {
+    font-family: var(--font-typewriter);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    opacity: 0.7;
+  }
+  .intro-cin__begin {
     font-family: var(--font-serif);
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-style: italic;
     color: var(--color-ink);
     background: transparent;
     border: 3px double var(--color-ink);
-    padding: 0.65rem 1.75rem;
+    padding: 0.7rem 2rem;
     cursor: pointer;
+    letter-spacing: 0.08em;
   }
-
-  .intro-cinematic__begin:hover {
+  .intro-cin__begin:hover {
     background: rgba(44, 26, 18, 0.06);
   }
 
-  .intro-cinematic__stage {
+  .intro-cin__stage {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(1rem, 3vw, 2rem);
+    gap: clamp(1.2rem, 3.5vw, 2.2rem);
     width: 100%;
+    max-width: 40rem;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
   }
 
-  .intro-cinematic__window-wrap {
+  /* ── Door wrapper ── */
+  .intro-cin__door-wrap {
     position: relative;
-    width: min(78vw, 300px);
-    aspect-ratio: 4 / 5;
+    width: min(82vw, 340px);
     max-width: 100%;
     margin-inline: auto;
-    perspective: 1400px;
+    perspective: 1200px;
     transform-style: preserve-3d;
-    filter: drop-shadow(0 6px 16px rgba(44, 26, 18, 0.22));
   }
 
-  .intro-cinematic__glow {
-    position: absolute;
-    left: 50%;
-    top: 46%;
-    width: 72%;
-    height: 78%;
-    translate: -50% -50%;
-    border-radius: 42% 42% 36% 36%;
-    background: radial-gradient(
-      ellipse at 50% 38%,
-      rgba(255, 248, 228, 0.95) 0%,
-      rgba(236, 208, 155, 0.45) 50%,
-      rgba(214, 194, 169, 0) 72%
-    );
-    filter: blur(18px);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .intro-cinematic__window-img {
-    position: relative;
-    z-index: 1;
+  .intro-cin__door-svg {
     display: block;
     width: 100%;
     height: auto;
-    user-select: none;
-    -webkit-user-drag: none;
-    mix-blend-mode: multiply;
-    filter: contrast(1.85) brightness(1.14) saturate(0.88);
-  }
-
-  .intro-cinematic__window-img--frame {
+    position: relative;
     z-index: 1;
+    stroke: #3A2515;
   }
 
-  .intro-cinematic__panel-track {
+  /* Glow behind the door */
+  .intro-cin__glow {
     position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    inset: 10% 8%;
+    z-index: 0;
+    border-radius: 44% 44% 6% 6%;
+    background: radial-gradient(
+      ellipse at 50% 35%,
+      rgba(255, 248, 225, 0.95) 0%,
+      rgba(245, 225, 175, 0.55) 40%,
+      rgba(214, 194, 169, 0) 75%
+    );
+    filter: blur(16px);
     pointer-events: none;
   }
 
-  .intro-cinematic__panel-shell {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-    backface-visibility: hidden;
+  /* Animated solid door panels that cover the SVG panes */
+  .intro-cin__panels {
+    position: absolute;
+    top: 30.2%;
+    bottom: 6.7%;
+    left: 13.5%;
+    right: 13.5%;
+    z-index: 2;
+    display: flex;
+    pointer-events: none;
+    perspective: 900px;
     transform-style: preserve-3d;
   }
 
-  .intro-cinematic__panel-shell--left {
-    transform-origin: right center;
-  }
-
-  .intro-cinematic__panel-shell--right {
-    transform-origin: left center;
-  }
-
-  .intro-cinematic__panel-img {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 200%;
+  .intro-cin__panel {
+    width: 50%;
     height: 100%;
-    object-fit: cover;
-    user-select: none;
-    -webkit-user-drag: none;
-    mix-blend-mode: multiply;
-    filter: contrast(1.85) brightness(1.14) saturate(0.88);
     backface-visibility: hidden;
+    transform-style: preserve-3d;
+    background:
+      repeating-linear-gradient(
+        95deg,
+        transparent 0 8px,
+        rgba(58, 37, 21, 0.06) 9px 10px
+      ),
+      linear-gradient(155deg, #7a5a3e 0%, #936e4e 42%, #6b4a32 100%);
+    border: 1.5px solid rgba(58, 37, 21, 0.55);
+    box-shadow:
+      inset 0 0 0 3px rgba(58, 37, 21, 0.12),
+      inset 0 0 22px rgba(30, 18, 10, 0.18),
+      2px 0 8px rgba(44, 26, 18, 0.12);
   }
 
-  .intro-cinematic__panel-img--left {
-    object-position: left center;
+  .intro-cin__panel--l {
+    transform-origin: left center;
+    border-right-width: 0.5px;
+  }
+  .intro-cin__panel--r {
+    transform-origin: right center;
+    border-left-width: 0.5px;
   }
 
-  .intro-cinematic__panel-img--right {
-    object-position: right center;
-  }
-
-  .intro-cinematic__rays {
+  /* Light rays streaming out */
+  .intro-cin__rays {
     position: absolute;
-    left: 12%;
-    right: 12%;
-    top: 44%;
-    height: 58%;
+    left: 10%;
+    right: 10%;
+    top: 40%;
+    height: 65%;
     z-index: 3;
     pointer-events: none;
     background: linear-gradient(
       to bottom,
-      rgba(255, 238, 200, 0.42) 0%,
-      rgba(232, 205, 150, 0.18) 45%,
-        transparent 100%
+      rgba(255, 240, 200, 0.38) 0%,
+      rgba(235, 210, 155, 0.15) 48%,
+      transparent 100%
     );
-    clip-path: polygon(18% 0%, 82% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
     transform-origin: top center;
   }
 
-  .intro-cinematic__tea {
-    width: min(92vw, 280px);
+  /* ── Tea scene ── */
+  .intro-cin__tea {
+    width: min(94vw, 360px);
   }
-
-  .intro-cinematic__tea-svg {
+  .intro-cin__tea-svg {
     display: block;
     width: 100%;
     height: auto;
