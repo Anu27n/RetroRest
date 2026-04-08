@@ -130,7 +130,7 @@ export default function IntroSequence({ onComplete, audioRef }) {
             transition={{ duration: reduceMotion ? 0.01 : 1.1, ease: 'easeOut', delay: 0.05 }}
           />
 
-          <svg className="intro-cin__door-svg" viewBox="0 0 300 420" fill="none">
+          <svg className="intro-cin__door-svg" viewBox="-6 -8 312 434" fill="none">
             <defs>
               <radialGradient id={`${rid}-opening`} cx="50%" cy="32%" r="72%">
                 <stop offset="0%" stopColor="#fffef5" stopOpacity="0.98" />

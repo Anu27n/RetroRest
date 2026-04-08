@@ -238,7 +238,7 @@
     gap: clamp(1.2rem, 3.5vw, 2.2rem);
     width: 100%;
     max-width: 40rem;
-    padding: 2rem 1rem;
+    padding: 3.5rem 1rem 2rem;
     box-sizing: border-box;
   }
 
@@ -250,6 +250,7 @@
     margin-inline: auto;
     perspective: 1200px;
     transform-style: preserve-3d;
+    overflow: visible;
   }
 
   .intro-cin__door-svg {
@@ -262,6 +263,7 @@
     opacity: 0.62;
     filter: sepia(0.35) contrast(0.85) brightness(1.08) blur(0.2px);
     mix-blend-mode: multiply;
+    overflow: visible;
   }
 
   /* Glow layers (line-art window sits on top) */
