@@ -408,11 +408,9 @@
     }
   }
 
-  @keyframes camel-hop {
-    0% { transform: translateY(0) rotate(0deg); }
-    35% { transform: translateY(-5px) rotate(-8deg); }
-    65% { transform: translateY(2px) rotate(5deg); }
-    100% { transform: translateY(0) rotate(0deg); }
+  @keyframes camel-caravan-sway {
+    0%, 100% { transform: translateX(0) rotate(-2.5deg); }
+    50% { transform: translateX(3px) rotate(2.5deg); }
   }
 
   .camel-banner {
@@ -428,11 +426,24 @@
       0 2px 12px rgba(44, 26, 18, 0.12);
   }
 
-  .camel-banner__icon {
+  .camel-banner__icon-wrap {
     flex-shrink: 0;
-    font-size: 1.35rem;
-    line-height: 1.2;
-    animation: camel-hop 0.75s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    animation: camel-caravan-sway 1.1s ease-in-out;
+  }
+
+  .camel-banner__icon-camel {
+    width: 1.65rem;
+    height: 1.65rem;
+    color: var(--color-ink);
+    filter:
+      sepia(0.45)
+      contrast(1.15)
+      brightness(0.88);
+    opacity: 0.92;
   }
 
   .camel-banner__text {

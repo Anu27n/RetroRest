@@ -1,3 +1,4 @@
+import { GiCamel } from 'react-icons/gi';
 import { useEffect, useState } from 'react';
 
 const MESSAGES = [
@@ -31,8 +32,8 @@ export default function CamelCourierBanner() {
       aria-live="polite"
       aria-label="Caravan updates from the kitchen"
     >
-      <span key={`camel-${tick}`} className="camel-banner__icon" aria-hidden>
-        🐫
+      <span key={`camel-${tick}`} className="camel-banner__icon-wrap" aria-hidden>
+        <GiCamel className="camel-banner__icon-camel" />
       </span>
       <p key={`msg-${index}`} className="camel-banner__text">
         {body}
