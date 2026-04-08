@@ -203,7 +203,7 @@ const Menu = ({ introComplete = true }) => {
           </div>
         </div>
 
-        <div className="mb-12 max-w-2xl mx-auto">
+        <div className="mb-12 max-w-2xl mx-auto flex justify-center">
           <CamelCourierBanner />
         </div>
 

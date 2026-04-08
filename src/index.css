@@ -259,6 +259,9 @@
     position: relative;
     z-index: 2;
     stroke: #3A2515;
+    opacity: 0.74;
+    filter: sepia(0.28) contrast(0.92) brightness(1.07);
+    mix-blend-mode: multiply;
   }
 
   /* Glow layers (line-art window sits on top) */
@@ -414,16 +417,14 @@
   }
 
   .camel-banner {
-    display: flex;
-    align-items: flex-start;
+    display: inline-flex;
+    align-items: center;
     gap: 0.65rem;
-    padding: 0.65rem 1rem;
-    border: 2px solid var(--color-ink);
-    border-radius: 2px;
-    background: linear-gradient(135deg, rgba(228, 214, 196, 0.92), rgba(198, 173, 141, 0.78));
-    box-shadow:
-      inset 0 1px 0 rgba(255, 252, 245, 0.45),
-      0 2px 12px rgba(44, 26, 18, 0.12);
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    opacity: 0.78;
   }
 
   .camel-banner__icon-wrap {
@@ -453,7 +454,7 @@
     line-height: 1.45;
     letter-spacing: 0.04em;
     color: var(--color-ink);
-    text-shadow: none;
+    text-shadow: 0 1px 0 rgba(255, 252, 245, 0.2);
     animation: camel-msg-in 0.55s ease-out;
   }
 
