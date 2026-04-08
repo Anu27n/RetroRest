@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
 const MESSAGES = [
-  '🐫 Camel Courier Notice: Our kitchen caravan has only two riders today. Orders may take a little longer.',
-  '🐫 Small kitchen, big flavours. Just two of us preparing everything fresh.',
-  '🐫 No seating yet in this tiny haveli, but the food is worth the wait.',
-  '🐫 Two cooks, one kitchen, and lots of chai. Thanks for your patience.',
+  '🐫 Caravan Update: Every dish begins its journey fresh in our kitchen.',
+  '🐫 Caravan Update: Good food takes a moment while spices come alive.',
+  '🐫 Caravan Update: The kitchen caravan moves with care and craft.',
+  '🐫 Caravan Update: Fresh chai and snacks are prepared one order at a time.',
+  '🐫 Caravan Update: Flavours travel from our kitchen to you with care.',
 ];
 
 const INTERVAL_MS = 7000;
@@ -28,7 +29,7 @@ export default function CamelCourierBanner() {
       className="camel-banner"
       role="status"
       aria-live="polite"
-      aria-label="Friendly café notice"
+      aria-label="Caravan updates from the kitchen"
     >
       <span key={`camel-${tick}`} className="camel-banner__icon" aria-hidden>
         🐫

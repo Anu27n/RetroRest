@@ -13,6 +13,7 @@ export default function IntroSequence({ onComplete, audioRef }) {
   const rid = useId().replace(/:/g, '');
   const reduceMotion = useReducedMotion();
 
+  const [started, setStarted] = useState(false);
   const [lightOn, setLightOn] = useState(false);
   const [teaOn, setTeaOn] = useState(false);
   const [exiting, setExiting] = useState(false);
@@ -43,12 +44,26 @@ export default function IntroSequence({ onComplete, audioRef }) {
   }, []);
 
   useEffect(() => {
-    queue(() => {
-      setLightOn(true);
-      audioRef.current?.play().catch(() => {});
-    }, (reduceMotion ? 0 : WINDOW_HOLD_MS) + LIGHT_DELAY_MS);
+    if (!started) return;
+    if (reduceMotion) return;
+    queue(() => setLightOn(true), WINDOW_HOLD_MS + LIGHT_DELAY_MS);
     return clearTimers;
-  }, [reduceMotion, queue, clearTimers, audioRef]);
+  }, [started, reduceMotion, queue, clearTimers]);
+
+  const onBegin = () => {
+    if (started) return;
+    const a = audioRef.current;
+    if (a) {
+      a.muted = false;
+      a.volume = 0.3;
+      a.play().catch(() => {});
+    }
+    setStarted(true);
+    if (reduceMotion) {
+      setLightOn(true);
+      setTeaOn(true);
+    }
+  };
 
   useEffect(() => {
     if (!lightOn) return;
@@ -79,6 +94,15 @@ export default function IntroSequence({ onComplete, audioRef }) {
       transition={{ duration: EXIT_FADE_MS / 1000, ease: 'easeInOut' }}
     >
       <button type="button" className="intro-cin__skip" onClick={skip}>Skip intro</button>
+
+      {!started && (
+        <div className="intro-cin__curtain">
+          <p className="intro-cin__tap">Tap to enable sound</p>
+          <button type="button" className="intro-cin__begin" onClick={onBegin}>
+            Enable sound
+          </button>
+        </div>
+      )}
 
       <div className="intro-cin__stage">
         {/* ─── ORNATE DOOR (pure SVG, inspired by reference) ─── */}
