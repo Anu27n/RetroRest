@@ -258,9 +258,9 @@
     height: auto;
     position: relative;
     z-index: 2;
-    stroke: #3A2515;
-    opacity: 0.74;
-    filter: sepia(0.28) contrast(0.92) brightness(1.07);
+    stroke: #5A4030;
+    opacity: 0.62;
+    filter: sepia(0.35) contrast(0.85) brightness(1.08) blur(0.2px);
     mix-blend-mode: multiply;
   }
 
@@ -276,13 +276,13 @@
     border-radius: 50% 50% 10% 10%;
     background: radial-gradient(
       ellipse 88% 92% at 50% 34%,
-      rgba(255, 252, 238, 0.98) 0%,
-      rgba(255, 236, 188, 0.72) 38%,
-      rgba(245,             212, 145, 0.35) 58%,
+      rgba(255, 252, 238, 0.80) 0%,
+      rgba(255, 236, 188, 0.55) 38%,
+      rgba(245, 212, 145, 0.25) 58%,
       transparent 78%
     );
-    filter: blur(24px);
-    mix-blend-mode: screen;
+    filter: blur(26px);
+    mix-blend-mode: soft-light;
   }
 
   .intro-cin__glow--core {
@@ -290,16 +290,16 @@
     border-radius: 48% 48% 6% 6%;
     background: radial-gradient(
       ellipse 70% 78% at 50% 36%,
-      rgba(255, 255, 250, 0.95) 0%,
-      rgba(255, 228, 160, 0.65) 42%,
-      rgba(255, 210, 120, 0.22) 62%,
+      rgba(255, 255, 250, 0.72) 0%,
+      rgba(255, 228, 160, 0.48) 42%,
+      rgba(255, 210, 120, 0.18) 62%,
       transparent 76%
     );
-    filter: blur(11px);
+    filter: blur(12px);
     mix-blend-mode: soft-light;
     box-shadow:
-      0 0 60px rgba(255, 235, 190, 0.45),
-      0 0 100px rgba(255, 220, 150, 0.22);
+      0 0 55px rgba(255, 235, 190, 0.32),
+      0 0 90px rgba(255, 220, 150, 0.15);
   }
 
   /* Light rays streaming downward from the opening */
@@ -311,17 +311,17 @@
     height: 72%;
     z-index: 3;
     pointer-events: none;
-    mix-blend-mode: screen;
+    mix-blend-mode: soft-light;
     background: linear-gradient(
       to bottom,
-      rgba(255, 248, 220, 0.72) 0%,
-      rgba(255, 232, 175, 0.38) 35%,
-      rgba(245, 215, 150, 0.16) 58%,
+      rgba(255, 248, 220, 0.52) 0%,
+      rgba(255, 232, 175, 0.28) 35%,
+      rgba(245, 215, 150, 0.12) 58%,
       transparent 100%
     );
     clip-path: polygon(14% 0%, 86% 0%, 100% 100%, 0% 100%);
     transform-origin: top center;
-    filter: blur(1.5px);
+    filter: blur(1.8px);
   }
 
   .intro-cin__camel {
@@ -330,9 +330,9 @@
     width: clamp(56px, 10vw, 86px);
     z-index: 4;
     pointer-events: none;
-    opacity: 0.68;
+    opacity: 0.55;
     transform-origin: 50% 88%;
-    filter: drop-shadow(0 2px 5px rgba(44, 26, 18, 0.22));
+    filter: sepia(0.3) drop-shadow(0 2px 5px rgba(44, 26, 18, 0.16));
   }
 
   .intro-cin__camel--left {
@@ -354,8 +354,8 @@
     display: block;
     width: 100%;
     height: auto;
-    color: rgba(44, 26, 18, 0.92);
-    filter: sepia(0.1);
+    color: rgba(44, 26, 18, 0.72);
+    filter: sepia(0.25);
   }
 
   @media (max-width: 768px) {
