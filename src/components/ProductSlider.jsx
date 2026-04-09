@@ -64,16 +64,6 @@ export default function ProductSlider() {
       <div className="product-slider__ornament">☙ ✤ ❧</div>
 
       <div className="product-slider__viewport">
-        {/* Arrow Left */}
-        <button
-          type="button"
-          className="product-slider__arrow product-slider__arrow--left"
-          onClick={handleNav(prev)}
-          aria-label="Previous product"
-        >
-          ‹
-        </button>
-
         {/* Card */}
         <div
           className="product-slider__card"
@@ -94,16 +84,6 @@ export default function ProductSlider() {
             <p className="product-slider__tagline">{product.tagline}</p>
           </div>
         </div>
-
-        {/* Arrow Right */}
-        <button
-          type="button"
-          className="product-slider__arrow product-slider__arrow--right"
-          onClick={handleNav(next)}
-          aria-label="Next product"
-        >
-          ›
-        </button>
       </div>
 
       {/* Dot indicators */}

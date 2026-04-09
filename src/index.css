@@ -453,16 +453,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    max-width: 260px;
+    gap: 0.25rem;
+    max-width: 380px;
     padding: 0.5rem;
     background: transparent;
     position: relative;
   }
 
   .product-slider__img-wrap {
-    width: 180px;
-    height: 180px;
+    width: 240px;
+    height: 240px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -474,8 +474,7 @@
     max-height: 100%;
     object-fit: contain;
     mix-blend-mode: multiply;
-    /* Aggressive contrast/brightness to 'bleach' off-white backgrounds to transparent white */
-    filter: brightness(1.15) contrast(1.6) grayscale(0.12) sepia(0.2);
+    filter: sepia(0.1) grayscale(0.05); /* Very subtle toning only */
     opacity: 0.95;
     transition: transform 0.3s ease;
   }
@@ -503,30 +502,7 @@
     margin: 0;
   }
 
-  .product-slider__arrow {
-    background: transparent;
-    border: 2px solid var(--color-ink);
-    color: var(--color-ink);
-    font-family: var(--font-serif);
-    font-size: 1.8rem;
-    width: 2.4rem;
-    height: 2.4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.2s, background 0.2s;
-    border-radius: 2px;
-    padding: 0;
-    line-height: 1;
-    flex-shrink: 0;
-  }
-
-  .product-slider__arrow:hover {
-    opacity: 1;
-    background: rgba(44, 26, 18, 0.06);
-  }
+  /* Arrows removed from JSX */
 
   .product-slider__dots {
     display: flex;
@@ -561,14 +537,14 @@
   @media (min-width: 640px) {
     .product-slider__card {
       flex-direction: row;
-      max-width: 420px;
-      gap: 1.5rem;
+      max-width: 600px;
+      gap: 2rem;
       padding: 1.25rem 2rem;
     }
 
     .product-slider__img-wrap {
-      width: 220px;
-      height: 220px;
+      width: 320px;
+      height: 320px;
     }
 
     .product-slider__info {
