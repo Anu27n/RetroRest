@@ -265,7 +265,7 @@ const Menu = ({ introComplete = true }) => {
 
         {/* ─── CARAVAN BANNER — reduced top margin ─── */}
         <div className="mb-4 max-w-2xl mx-auto flex justify-center">
-          <CamelCourierBanner />
+          <CamelCourierBanner active={introComplete} />
         </div>
 
         {/* ─── PRODUCT SLIDER ─── */}
