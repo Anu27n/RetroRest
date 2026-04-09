@@ -465,6 +465,170 @@
       font-size: 0.78rem;
     }
   }
+
+  /* —— Grievance hamburger / panel —— */
+  .grievance-menu__toggle {
+    position: fixed;
+    top: 0.95rem;
+    left: 0.95rem;
+    z-index: 10070;
+    width: 2.6rem;
+    height: 2.6rem;
+    display: grid;
+    place-items: center;
+    border: 2px double var(--color-ink);
+    background: rgba(236, 223, 204, 0.78);
+    color: var(--color-ink);
+    font-size: 1.2rem;
+    box-shadow: 0 2px 12px rgba(44, 26, 18, 0.12);
+    backdrop-filter: blur(1px);
+  }
+
+  .grievance-menu__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10080;
+    background: rgba(36, 22, 14, 0.24);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 4.2rem 1rem 1rem;
+  }
+
+  .grievance-menu__panel {
+    width: min(90vw, 390px);
+    border: 3px double var(--color-ink);
+    background:
+      linear-gradient(180deg, rgba(243, 234, 219, 0.96), rgba(224, 208, 183, 0.95)),
+      repeating-linear-gradient(0deg, transparent 0 16px, rgba(44, 26, 18, 0.03) 16px 17px);
+    box-shadow: 0 8px 24px rgba(44, 26, 18, 0.2);
+    padding: 0.9rem;
+  }
+
+  .grievance-menu__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px dashed rgba(44, 26, 18, 0.28);
+    padding-bottom: 0.55rem;
+  }
+
+  .grievance-menu__head h2 {
+    margin: 0;
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--color-ink);
+  }
+
+  .grievance-menu__head button {
+    border: 1px solid rgba(44, 26, 18, 0.4);
+    background: transparent;
+    color: var(--color-ink);
+    font-family: var(--font-typewriter);
+    font-size: 0.64rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+  }
+
+  .grievance-menu__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .grievance-menu__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+  }
+
+  .grievance-menu__row button {
+    border: 1px solid rgba(44, 26, 18, 0.35);
+    background: rgba(255, 252, 245, 0.46);
+    color: var(--color-ink);
+    font-family: var(--font-typewriter);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.36rem 0.45rem;
+    cursor: pointer;
+  }
+
+  .grievance-menu__row button.is-active {
+    background: rgba(44, 26, 18, 0.11);
+    border-color: rgba(44, 26, 18, 0.6);
+  }
+
+  .grievance-menu__input,
+  .grievance-menu__textarea {
+    width: 100%;
+    border: 1px solid rgba(44, 26, 18, 0.35);
+    background: rgba(255, 252, 245, 0.58);
+    color: var(--color-ink);
+    font-family: var(--font-typewriter);
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    padding: 0.45rem 0.5rem;
+    box-sizing: border-box;
+  }
+
+  .grievance-menu__textarea {
+    min-height: 88px;
+    resize: vertical;
+  }
+
+  .grievance-menu__submit {
+    border: 1px solid rgba(44, 26, 18, 0.45);
+    background: rgba(44, 26, 18, 0.12);
+    color: var(--color-ink);
+    font-family: var(--font-typewriter);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.48rem 0.6rem;
+    cursor: pointer;
+  }
+
+  .grievance-menu__ack {
+    margin: 0.15rem 0 0;
+    font-family: var(--font-typewriter);
+    font-size: 0.64rem;
+    color: var(--color-ink);
+    opacity: 0.8;
+  }
+
+  .grievance-menu__contact {
+    margin-top: 0.85rem;
+    padding-top: 0.7rem;
+    border-top: 1px dashed rgba(44, 26, 18, 0.28);
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .grievance-menu__contact p {
+    margin: 0 0 0.25rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: var(--font-typewriter);
+    color: var(--color-ink);
+    opacity: 0.8;
+  }
+
+  .grievance-menu__contact a {
+    color: var(--color-ink);
+    text-decoration: none;
+    font-family: var(--font-typewriter);
+    font-size: 0.72rem;
+  }
+
+  .grievance-menu__contact a:hover {
+    text-decoration: underline;
+  }
 }
 
 @utility fill-blank {

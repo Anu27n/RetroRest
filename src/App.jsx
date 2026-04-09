@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import GrievanceMenu from './components/GrievanceMenu';
 import IntroSequence from './components/IntroSequence';
 import Menu from './components/Menu';
 
@@ -30,6 +31,7 @@ function App() {
   return (
     <div className="min-h-screen font-serif text-ink relative overflow-hidden bg-transparent">
       {!introDone && <IntroSequence onComplete={finishIntro} audioRef={audioRef} />}
+      <GrievanceMenu visible={introDone} />
       <Menu introComplete={introDone} />
     </div>
   );
