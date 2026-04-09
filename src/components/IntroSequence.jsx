@@ -62,6 +62,7 @@ export default function IntroSequence({ onComplete, audioRef }) {
     if (started) return;
     const a = audioRef.current;
     if (a) {
+      a.currentTime = 0;
       a.muted = false;
       a.volume = 0.3;
       a.play().catch(() => {});
@@ -104,15 +105,6 @@ export default function IntroSequence({ onComplete, audioRef }) {
     >
       <button type="button" className="intro-cin__skip" onClick={skip}>Skip intro</button>
 
-      {!started && (
-        <div className="intro-cin__curtain">
-          <p className="intro-cin__tap">Tap to enable sound</p>
-          <button type="button" className="intro-cin__begin" onClick={onBegin}>
-            Enable sound
-          </button>
-        </div>
-      )}
-
       <div className="intro-cin__stage">
         {/* ─── ORNATE DOOR (pure SVG, inspired by reference) ─── */}
         <div className="intro-cin__door-wrap">
@@ -150,7 +142,32 @@ export default function IntroSequence({ onComplete, audioRef }) {
               transition={{ duration: reduceMotion ? 0.01 : 1.2, ease: 'easeOut' }}
             />
 
-            {/* ═══ OUTER FRAME — thick + thin double line ═══ */}
+            {/* ═══ RAJASTHANI MAN — appears inside window after doors open & light glows ═══ */}
+            <defs>
+              <clipPath id={`${rid}-archClip`}>
+                <path d="M 34 392 L 34 126 A 116 108 0 0 1 266 126 L 266 392 Z" />
+              </clipPath>
+            </defs>
+            <motion.g
+              clipPath={`url(#${rid}-archClip)`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: lightOn ? 1 : 0 }}
+              transition={{ duration: reduceMotion ? 0.01 : 1.2, ease: 'easeOut', delay: reduceMotion ? 0 : 0.4 }}
+            >
+              <image
+                href="/assets/rajasthani-namaste.png"
+                x="34"
+                y="126"
+                width="232"
+                height="266"
+                preserveAspectRatio="xMidYMin slice"
+                style={{
+                  mixBlendMode: 'multiply',
+                  filter: 'contrast(1.68) brightness(1.06) sepia(0.12) grayscale(0.05)',
+                  opacity: 0.9,
+                }}
+              />
+            </motion.g>
             <path d="M 16 400 L 16 118 A 134 124 0 0 1 284 118 L 284 400 Z"
               stroke={ink} strokeWidth="5.5" strokeLinejoin="round" />
             <path d="M 22 397 L 22 120 A 128 118 0 0 1 278 120 L 278 397 Z"
@@ -465,6 +482,14 @@ export default function IntroSequence({ onComplete, audioRef }) {
             <GiCamel className="intro-cin__camel-icon" />
           </motion.div>
         </div>
+
+        {!started && (
+          <div className="intro-cin__curtain">
+            <button type="button" className="intro-cin__begin" onClick={onBegin}>
+              Tap to Enter
+            </button>
+          </div>
+        )}
 
         {/* ─── TEA SCENE ───
              Wrapper is a plain div (no transforms/opacity = no isolation group).

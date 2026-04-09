@@ -7,13 +7,30 @@ const MESSAGES = [
   '🐫 Caravan Update: The kitchen caravan moves with care and craft.',
   '🐫 Caravan Update: Fresh chai and snacks are prepared one order at a time.',
   '🐫 Caravan Update: Flavours travel from our kitchen to you with care.',
+  '🐫 Caravan Update: Khamma Ghani! Welcome to the Ancient Sip caravan — where every cup tells a story.',
 ];
 
-const INTERVAL_MS = 7000;
+const INTERVAL_MS = 8000; // Increased to give time for typewriter
 
 export default function CamelCourierBanner() {
   const [index, setIndex] = useState(0);
   const [tick, setTick] = useState(0);
+  const [visibleWords, setVisibleWords] = useState(0);
+
+  const fullText = MESSAGES[index].replace(/^\s*🐫\s*/, '');
+  const words = fullText.split(' ');
+
+  useEffect(() => {
+    setVisibleWords(0);
+    let count = 0;
+    const wordTimer = setInterval(() => {
+      count++;
+      setVisibleWords(count);
+      if (count >= words.length) clearInterval(wordTimer);
+    }, 180); // Speed of word reveal
+
+    return () => clearInterval(wordTimer);
+  }, [index, words.length]);
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -22,8 +39,6 @@ export default function CamelCourierBanner() {
     }, INTERVAL_MS);
     return () => clearInterval(id);
   }, []);
-
-  const body = MESSAGES[index].replace(/^\s*🐫\s*/, '');
 
   return (
     <div
@@ -36,7 +51,34 @@ export default function CamelCourierBanner() {
         <GiCamel className="camel-banner__icon-camel" />
       </span>
       <p key={`msg-${index}`} className="camel-banner__text">
-        {body}
+        {words.map((word, i) => (
+          <span
+            key={i}
+            className="typewriter-word"
+            style={{
+              opacity: i < visibleWords ? 1 : 0,
+              transform: i < visibleWords ? 'translateY(0)' : 'translateY(4px)',
+              transition: 'opacity 0.3s ease, transform 0.3s ease',
+              display: 'inline-block',
+              marginRight: '0.25em',
+            }}
+          >
+            {word}
+          </span>
+        ))}
+        {visibleWords < words.length && (
+          <span
+            className="typewriter-cursor"
+            style={{
+              display: 'inline-block',
+              animation: 'blink-cursor 0.75s step-end infinite',
+              borderRight: '2px solid var(--color-ink)',
+              marginLeft: '2px',
+              height: '1em',
+              verticalAlign: 'text-bottom',
+            }}
+          />
+        )}
       </p>
     </div>
   );

@@ -1,4 +1,59 @@
+import { useEffect, useRef, useState } from 'react';
 import CamelCourierBanner from './CamelCourierBanner';
+import ProductSlider from './ProductSlider';
+
+/* ─── TYPEWRITER COMPONENT — word by word ─── */
+function TypewriterText({ text, className = '', delayMs = 180, startDelay = 0 }) {
+  const [visibleWords, setVisibleWords] = useState(0);
+  const words = text.split(' ');
+
+  useEffect(() => {
+    let timer;
+    const start = setTimeout(() => {
+      let count = 0;
+      timer = setInterval(() => {
+        count++;
+        setVisibleWords(count);
+        if (count >= words.length) clearInterval(timer);
+      }, delayMs);
+    }, startDelay);
+    return () => {
+      clearTimeout(start);
+      clearInterval(timer);
+    };
+  }, [words.length, delayMs, startDelay]);
+
+  return (
+    <span className={className}>
+      {words.map((word, i) => (
+        <span
+          key={i}
+          className="typewriter-word"
+          style={{
+            opacity: i < visibleWords ? 1 : 0,
+            transform: i < visibleWords ? 'translateY(0)' : 'translateY(8px)',
+            transition: 'opacity 0.35s ease, transform 0.35s ease',
+            display: 'inline-block',
+            marginRight: '0.28em',
+          }}
+        >
+          {word}
+        </span>
+      ))}
+      <span
+        className="typewriter-cursor"
+        style={{
+          display: visibleWords < words.length ? 'inline-block' : 'none',
+          animation: 'blink-cursor 0.75s step-end infinite',
+          borderRight: '3px solid var(--color-ink)',
+          marginLeft: '2px',
+          height: '0.85em',
+          verticalAlign: 'text-bottom',
+        }}
+      />
+    </span>
+  );
+}
 
 const Menu = ({ introComplete = true }) => {
   const menuCategories = [
@@ -193,18 +248,29 @@ const Menu = ({ introComplete = true }) => {
         <div className="absolute -bottom-3 -left-3 w-6 h-6 border-[3px] border-ink bg-vintage rotate-45"></div>
         <div className="absolute -bottom-3 -right-3 w-6 h-6 border-[3px] border-ink bg-vintage rotate-45"></div>
 
-        <div className="text-center mb-16">
+        {/* ─── TITLE with typewriter animation ─── */}
+        <div className="text-center mb-6">
           <div className="inline-block relative">
             <h1 className="text-5xl sm:text-7xl md:text-9xl font-serif italic font-medium text-ink uppercase tracking-wider mb-2 drop-shadow-sm">
-              Ancient Sip
+              {introComplete ? (
+                <TypewriterText text="Ancient Sip" delayMs={280} startDelay={400} />
+              ) : (
+                'Ancient Sip'
+              )}
             </h1>
             <div className="absolute -left-10 md:-left-16 top-1/2 -mt-[1px] w-8 md:w-12 border-t-[3px] border-ink hidden sm:block"></div>
             <div className="absolute -right-10 md:-right-16 top-1/2 -mt-[1px] w-8 md:w-12 border-t-[3px] border-ink hidden sm:block"></div>
           </div>
         </div>
 
-        <div className="mb-12 max-w-2xl mx-auto flex justify-center">
+        {/* ─── CARAVAN BANNER — reduced top margin ─── */}
+        <div className="mb-4 max-w-2xl mx-auto flex justify-center">
           <CamelCourierBanner />
+        </div>
+
+        {/* ─── PRODUCT SLIDER ─── */}
+        <div className="mb-16">
+          <ProductSlider />
         </div>
 
         <div className="space-y-20">

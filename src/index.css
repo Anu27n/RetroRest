@@ -194,16 +194,16 @@
   .intro-cin__skip:hover { background: rgba(214, 194, 169, 0.9); }
 
   .intro-cin__curtain {
-    position: fixed;
-    inset: 0;
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 10055;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    background: rgba(214, 194, 169, 0.38);
-    backdrop-filter: blur(2px);
+    padding: 0;
   }
 
   .intro-cin__tap {
@@ -399,6 +399,189 @@
 
   .intro-cin__tea--retro .intro-cin__tea-svg {
     filter: sepia(0.12) contrast(1.06);
+  }
+
+  /* —— Typewriter cursor blink —— */
+  @keyframes blink-cursor {
+    0%, 100% { border-color: var(--color-ink); }
+    50% { border-color: transparent; }
+  }
+
+  /* —— Product Slider —— */
+  @keyframes product-slide-in-right {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes product-slide-in-left {
+    from { opacity: 0; transform: translateX(-40px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .product-slider {
+    text-align: center;
+    padding: 0.5rem 0 1rem;
+    position: relative;
+  }
+
+  .product-slider__heading {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: var(--color-ink);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.06em;
+  }
+
+  .product-slider__ornament {
+    font-size: 0.85rem;
+    color: var(--color-ink);
+    opacity: 0.5;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.18em;
+  }
+
+  .product-slider__viewport {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 180px;
+  }
+
+  .product-slider__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 260px;
+    padding: 0.5rem;
+    background: transparent;
+    position: relative;
+  }
+
+  .product-slider__img-wrap {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .product-slider__img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    /* Aggressive contrast/brightness to 'bleach' off-white backgrounds to transparent white */
+    filter: brightness(1.15) contrast(1.6) grayscale(0.12) sepia(0.2);
+    opacity: 0.95;
+    transition: transform 0.3s ease;
+  }
+
+  .product-slider__info {
+    text-align: center;
+  }
+
+  .product-slider__name {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--color-ink);
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.03em;
+  }
+
+  .product-slider__tagline {
+    font-family: var(--font-typewriter);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    color: var(--color-ink);
+    opacity: 0.7;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .product-slider__arrow {
+    background: transparent;
+    border: 2px solid var(--color-ink);
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s, background 0.2s;
+    border-radius: 2px;
+    padding: 0;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .product-slider__arrow:hover {
+    opacity: 1;
+    background: rgba(44, 26, 18, 0.06);
+  }
+
+  .product-slider__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+  }
+
+  .product-slider__dot {
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid var(--color-ink);
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.25s, transform 0.25s;
+    opacity: 0.55;
+  }
+
+  .product-slider__dot:hover {
+    opacity: 0.85;
+    transform: scale(1.15);
+  }
+
+  .product-slider__dot--active {
+    background: var(--color-ink);
+    opacity: 0.9;
+    transform: scale(1.15);
+  }
+
+  @media (min-width: 640px) {
+    .product-slider__card {
+      flex-direction: row;
+      max-width: 420px;
+      gap: 1.5rem;
+      padding: 1.25rem 2rem;
+    }
+
+    .product-slider__img-wrap {
+      width: 220px;
+      height: 220px;
+    }
+
+    .product-slider__info {
+      text-align: left;
+    }
+
+    .product-slider__name {
+      font-size: 1.3rem;
+    }
+
+    .product-slider__tagline {
+      font-size: 0.72rem;
+    }
   }
 
   /* —— Camel courier banner —— */
