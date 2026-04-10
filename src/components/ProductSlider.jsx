@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 
 const PRODUCTS = [
   {
-    name: 'Baklava Tea',
-    tagline: 'A royal blend of Turkish heritage',
+    name: 'Bakha Tea',
+    tagline: 'A fragrant Rajasthani brew steeped in tradition',
     img: '/assets/baklavatea.png',
   },
   {

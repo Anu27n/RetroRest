@@ -213,8 +213,8 @@ const Menu = ({ introComplete = true }) => {
           className="decor-img w-72 md:w-[450px] rotate-[-8deg]"
         />
       </div>
-      {/* Teapot — middle right */}
-      <div className="fixed top-[48%] right-0 md:right-6 z-0 pointer-events-none animate-float opacity-[0.48] mix-blend-multiply" style={{ animationDelay: '2.5s' }}>
+      {/* Teapot — middle right (hidden below md only — avoids overlap with product slider on phones) */}
+      <div className="hidden md:block fixed top-[45%] right-[-5%] md:right-4 z-0 pointer-events-none animate-float opacity-[0.48] mix-blend-multiply" style={{ animationDelay: '2.5s' }}>
         <img
           src="/assets/teapot.png"
           alt=""
@@ -269,8 +269,8 @@ const Menu = ({ introComplete = true }) => {
           <CamelCourierBanner active={introComplete} />
         </div>
 
-        {/* ─── PRODUCT SLIDER ─── */}
-        <div className="mb-16">
+        {/* ─── PRODUCT SLIDER (isolate stacking on mobile / Safari) ─── */}
+        <div className="mb-16 relative z-10 isolate">
           <ProductSlider />
         </div>
 
