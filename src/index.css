@@ -129,6 +129,16 @@
     mix-blend-mode: multiply;
   }
 
+  /* Teapot asset reads lighter than other decor — match paper/sepia more aggressively */
+  .decor-img--teapot {
+    filter:
+      sepia(0.52)
+      saturate(0.58)
+      brightness(0.88)
+      contrast(0.82)
+      blur(0.2px);
+  }
+
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-12px); }
@@ -405,10 +415,68 @@
   /* ── Tea scene ── */
   .intro-cin__tea {
     width: min(94vw, 360px);
+    max-width: 100%;
+    margin-inline: auto;
+    position: relative;
+    overflow: hidden;
     background: transparent;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
+
+  /* Teapot overlay: clip so rotation / iOS compositing never spills past the scene */
+  .intro-cin__tea-pot-layer {
+    position: absolute;
+    left: 0;
+    top: 5%;
+    width: 52%;
+    max-width: 52%;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+    transform-origin: 18% 82%;
+    /* IntroSequence only: one multiply on the whole pot (image + chai) → sits in paper tone */
+    mix-blend-mode: multiply;
+  }
+
+  .intro-cin__tea-pot-inner {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .intro-cin__tea-pot-img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    transform: scaleX(-1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* Intro teapot only — warm / muted (blend is on .intro-cin__tea-pot-layer) */
+    -webkit-filter: sepia(0.55) saturate(0.55) brightness(0.8) contrast(0.76);
+    filter: sepia(0.55) saturate(0.55) brightness(0.8) contrast(0.76);
+  }
+
+  /* Chai inside pot — deeper amber so it never reads as a white highlight */
+  .intro-cin__tea-chai-fill {
+    position: absolute;
+    left: 26%;
+    top: 32%;
+    width: 46%;
+    height: 46%;
+    border-radius: 48% 50% 46% 44%;
+    pointer-events: none;
+    transform-origin: center bottom;
+    background: radial-gradient(
+      ellipse 100% 100% at 48% 45%,
+      rgba(130, 78, 38, 0.72) 0%,
+      rgba(88, 48, 22, 0.78) 45%,
+      rgba(52, 30, 14, 0.65) 100%
+    );
+  }
+
   .intro-cin__tea-svg {
     display: block;
     width: 100%;

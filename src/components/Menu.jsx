@@ -218,7 +218,7 @@ const Menu = ({ introComplete = true }) => {
         <img
           src="/assets/teapot.png"
           alt=""
-          className="decor-img w-72 md:w-[500px] rotate-[12deg]"
+          className="decor-img decor-img--teapot w-72 md:w-[500px] rotate-[12deg]"
         />
       </div>
       {/* Leaves — top left */}

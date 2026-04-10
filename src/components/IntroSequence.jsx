@@ -491,27 +491,10 @@ export default function IntroSequence({ onComplete, audioRef }) {
           </div>
         )}
 
-        {/* ─── TEA SCENE ───
-             Wrapper is a plain div (no transforms/opacity = no isolation group).
-             This lets the teapot's mix-blend-mode: multiply reach the page paper bg.
-        */}
-        <div
-          className="intro-cin__tea intro-cin__tea--retro"
-          style={{ position: 'relative' }}
-        >
-          {/* Teapot image — mix-blend-mode on THIS motion.div blends against page bg
-              because no parent between here and .intro-cin creates isolation. */}
+        {/* ─── TEA SCENE — teapot uses AI-cutout PNG; scene clips overflow (iOS-safe) ─── */}
+        <div className="intro-cin__tea intro-cin__tea--retro">
           <motion.div
-            style={{
-              position: 'absolute',
-              left: '0%',
-              top: '5%',
-              width: '52%',
-              zIndex: 2,
-              transformOrigin: '18% 82%',
-              pointerEvents: 'none',
-              mixBlendMode: 'multiply',
-            }}
+            className="intro-cin__tea-pot-layer"
             initial={false}
             animate={
               teaOn
@@ -530,32 +513,16 @@ export default function IntroSequence({ onComplete, audioRef }) {
               },
             }}
           >
-            <div style={{ position: 'relative', width: '100%' }}>
+            <div className="intro-cin__tea-pot-inner">
               <img
                 src="/assets/teapot.png"
                 alt=""
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  height: 'auto',
-                  transform: 'scaleX(-1)',
-                  filter: 'contrast(1.8) brightness(1.12) sepia(0.12)',
-                }}
+                className="intro-cin__tea-pot-img"
+                draggable={false}
               />
-              {/* Chai visible inside the pot body — drains as it pours */}
+              {/* Chai inside pot — styled in CSS (.intro-cin__tea-chai-fill) for vintage tone */}
               <motion.div
-                style={{
-                  position: 'absolute',
-                  left: '26%',
-                  top: '32%',
-                  width: '46%',
-                  height: '46%',
-                  background:
-                    'radial-gradient(ellipse at 48% 45%, rgba(201,149,72,0.82), rgba(139,84,37,0.70), rgba(92,54,24,0.50))',
-                  borderRadius: '48% 50% 46% 44%',
-                  pointerEvents: 'none',
-                  transformOrigin: 'center bottom',
-                }}
+                className="intro-cin__tea-chai-fill"
                 initial={false}
                 animate={
                   teaOn
