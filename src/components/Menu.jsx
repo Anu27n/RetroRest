@@ -197,43 +197,44 @@ const Menu = ({ introComplete = true }) => {
     <section className="relative min-h-screen py-16 md:py-24 px-4 sm:px-6 w-full max-w-7xl mx-auto">
 
       {/* --- DECORATIVE LOW OPACITY CLIENT ASSETS --- */}
-      {/* Aeroplane floating in the top right sky */}
-      <div className="fixed top-8 right-8 md:top-12 md:right-12 z-0 pointer-events-none animate-float opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '0s' }}>
+      {/* Aeroplane — top right */}
+      <div className="fixed top-6 right-6 md:top-10 md:right-10 z-0 pointer-events-none animate-float opacity-[0.55] mix-blend-multiply" style={{ animationDelay: '0s' }}>
         <img
           src="/assets/aeroplane.png"
-          alt="Decorative aeroplane"
-          className="w-56 md:w-80 blur-[0.2px] rotate-[-6deg] contrast-[1.8] brightness-[1.15]"
+          alt=""
+          className="decor-img w-56 md:w-80 rotate-[-6deg]"
         />
       </div>
-      {/* Bicycle anchored with a slow sway */}
-      <div className="fixed bottom-6 left-6 md:bottom-12 md:left-12 z-0 pointer-events-none animate-float-slow opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '1s' }}>
+      {/* Bicycle — bottom left */}
+      <div className="fixed bottom-6 left-4 md:bottom-12 md:left-10 z-0 pointer-events-none animate-float-slow opacity-[0.5] mix-blend-multiply" style={{ animationDelay: '1s' }}>
         <img
           src="/assets/bicycle.png"
-          alt="Decorative bicycle"
-          className="w-72 md:w-[450px] blur-[0.2px] rotate-[-8deg] contrast-[1.8] brightness-[1.15]"
+          alt=""
+          className="decor-img w-72 md:w-[450px] rotate-[-8deg]"
         />
       </div>
-      {/* Teapot sitting with subtle breath */}
-      <div className="fixed top-[45%] right-[-5%] md:right-4 z-0 pointer-events-none animate-float opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '2.5s' }}>
+      {/* Teapot — middle right */}
+      <div className="fixed top-[48%] right-0 md:right-6 z-0 pointer-events-none animate-float opacity-[0.48] mix-blend-multiply" style={{ animationDelay: '2.5s' }}>
         <img
           src="/assets/teapot.png"
-          alt="Decorative teapot"
-          className="w-72 md:w-[500px] blur-[0.2px] rotate-[12deg] contrast-[1.8] brightness-[1.15]"
+          alt=""
+          className="decor-img w-72 md:w-[500px] rotate-[12deg]"
         />
       </div>
-      {/* Leaves balancing the corners with opposing floats */}
-      <div className="fixed -top-10 -left-10 md:-top-16 md:-left-16 z-0 pointer-events-none animate-float-slow opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '0.5s' }}>
+      {/* Leaves — top left */}
+      <div className="fixed -top-6 -left-6 md:-top-10 md:-left-10 z-0 pointer-events-none animate-float-slow opacity-[0.45] mix-blend-multiply" style={{ animationDelay: '0.5s' }}>
         <img
           src="/assets/leaves.png"
-          alt="Decorative leaves top left"
-          className="w-64 md:w-[400px] blur-[0.2px] rotate-[-25deg] contrast-[1.8] brightness-[1.15]"
+          alt=""
+          className="decor-img w-64 md:w-[400px] rotate-[-25deg]"
         />
       </div>
-      <div className="fixed -bottom-10 -right-10 md:-bottom-20 md:-right-20 z-0 pointer-events-none animate-float opacity-[0.85] mix-blend-multiply" style={{ animationDelay: '1.5s' }}>
+      {/* Leaves — bottom right */}
+      <div className="fixed -bottom-6 -right-6 md:-bottom-12 md:-right-12 z-0 pointer-events-none animate-float opacity-[0.45] mix-blend-multiply" style={{ animationDelay: '1.5s' }}>
         <img
           src="/assets/leaves.png"
-          alt="Decorative leaves bottom right"
-          className="w-80 md:w-[500px] blur-[0.2px] rotate-[145deg] contrast-[1.8] brightness-[1.15]"
+          alt=""
+          className="decor-img w-80 md:w-[500px] rotate-[145deg]"
         />
       </div>
 

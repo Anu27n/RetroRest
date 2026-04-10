@@ -119,6 +119,16 @@
 }
 
 @layer utilities {
+  .decor-img {
+    filter:
+      sepia(0.55)
+      saturate(0.6)
+      brightness(1.12)
+      contrast(1.1)
+      blur(0.2px);
+    mix-blend-mode: multiply;
+  }
+
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-12px); }
@@ -240,6 +250,9 @@
     max-width: 40rem;
     padding: 3.5rem 1rem 2rem;
     box-sizing: border-box;
+    background: transparent;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   /* ── Door wrapper ── */
@@ -251,6 +264,9 @@
     perspective: 1200px;
     transform-style: preserve-3d;
     overflow: visible;
+    background: transparent;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   .intro-cin__door-svg {
@@ -389,12 +405,18 @@
   /* ── Tea scene ── */
   .intro-cin__tea {
     width: min(94vw, 360px);
+    background: transparent;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
   .intro-cin__tea-svg {
     display: block;
     width: 100%;
     height: auto;
     overflow: visible;
+    background: transparent;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
   .intro-cin__tea--retro .intro-cin__tea-svg {
@@ -421,6 +443,8 @@
     text-align: center;
     padding: 0.5rem 0 1rem;
     position: relative;
+    overflow: hidden;
+    max-width: 100%;
   }
 
   .product-slider__heading {
@@ -441,7 +465,6 @@
   }
 
   .product-slider__viewport {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -456,8 +479,9 @@
     gap: 0.25rem;
     max-width: 380px;
     padding: 0.5rem;
-    background: transparent;
-    position: relative;
+    background: none;
+    border: none;
+    box-shadow: none;
   }
 
   .product-slider__img-wrap {
@@ -467,15 +491,13 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background: transparent;
   }
 
   .product-slider__img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    mix-blend-mode: multiply;
-    filter: sepia(0.1) grayscale(0.05); /* Very subtle toning only */
-    opacity: 0.95;
     transition: transform 0.3s ease;
   }
 
